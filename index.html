@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Poath Road</title>
+		<meta
+			name="description"
+			content="Poath Road is a future‑focused investment firm. Light, professional finance aesthetic with restrained motion and disciplined typography." />
+		<style>
+			:root {
+				/* Colour system — light base with deep blue & purple accents */
+				--base-0: #f7f9fc; /* background */
+				--base-1: #eef2f8; /* subtle panels */
+				--ink-0: #0b1220; /* primary text */
+				--ink-1: #4b5568; /* secondary text */
+				--navy: #0e1b3a; /* dark blue */
+				--purple: #4b2bbf; /* deep purple */
+				--indigo: #273e7a; /* supporting blue */
+				--line: #d7dfeb; /* borders */
+
+				--radius: 8px; /* sharper corners for finance look */
+				--shadow: 0 6px 20px rgba(14, 27, 58, 0.1);
+				--maxw: 1200px;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				background: var(--base-0);
+				color: var(--ink-0);
+				font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+					Roboto, Helvetica, Arial;
+				line-height: 1.55;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			.container {
+				max-width: var(--maxw);
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+
+			/* Hero canvas (scoped to hero section) */
+			.hero-canvas {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+				display: block;
+				pointer-events: none;
+			}
+
+			/* Header */
+			header {
+				position: sticky;
+				top: 0;
+				z-index: 40;
+				background: rgba(247, 249, 252, 0.8);
+				backdrop-filter: saturate(120%) blur(8px);
+				border-bottom: 1px solid var(--line);
+			}
+			.nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 68px;
+			}
+
+			/* Wordmark — refined street sign */
+			.brand {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				font-weight: 800;
+				letter-spacing: 0.4px;
+			}
+			.sign {
+				width: 52px;
+				height: 52px;
+				border-radius: 6px;
+				display: grid;
+				place-items: center;
+				border: 1px solid var(--line);
+				background: linear-gradient(180deg, #ffffff, #f3f6fb);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+			}
+			.sign span {
+				font-size: 24px;
+				font-weight: 900;
+				color: var(--navy);
+				line-height: 1;
+			}
+			.brand-tag {
+				font-size: 12px;
+				color: var(--ink-1);
+			}
+
+			nav a {
+				padding: 8px 10px;
+				border-radius: 6px;
+				color: var(--ink-0);
+				opacity: 0.9;
+			}
+			nav a:hover {
+				background: #eef2f8;
+				opacity: 1;
+			}
+
+			/* Hero */
+			.hero {
+				position: relative;
+				overflow: hidden;
+				min-height: 100vh;
+				border-bottom: 1px solid var(--line);
+			}
+			.hero-wrap {
+				display: grid;
+				grid-template-columns: 1.1fr 0.9fr;
+				gap: 28px;
+				align-items: center;
+				min-height: 72svh;
+				padding: 60px 0;
+			}
+
+			/* Subtle gradient band background */
+			.bands {
+				position: absolute;
+				inset: 0;
+				pointer-events: none;
+				background: radial-gradient(
+						900px 500px at 10% -10%,
+						rgba(39, 62, 122, 0.1),
+						transparent 60%
+					),
+					radial-gradient(
+						700px 500px at 110% 10%,
+						rgba(75, 43, 191, 0.1),
+						transparent 60%
+					);
+			}
+
+			h1 {
+				font-size: clamp(40px, 5.6vw, 72px);
+				line-height: 1.05;
+				margin: 0 0 14px;
+				letter-spacing: 0.2px;
+				font-weight: 850;
+			}
+			.accent {
+				background: linear-gradient(90deg, var(--navy), var(--purple));
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			.sub {
+				font-size: clamp(16px, 2vw, 20px);
+				color: var(--ink-1);
+				max-width: 640px;
+			}
+
+			.cta {
+				display: flex;
+				gap: 12px;
+				flex-wrap: wrap;
+				margin-top: 20px;
+			}
+			.btn {
+				padding: 11px 16px;
+				border-radius: 7px;
+				font-weight: 600;
+				border: 1px solid var(--line);
+				background: #ffffff;
+				box-shadow: 0 2px 10px rgba(14, 27, 58, 0.06);
+			}
+			.btn:hover {
+				box-shadow: 0 6px 18px rgba(14, 27, 58, 0.12);
+			}
+			.btn.primary {
+				background: linear-gradient(180deg, #ffffff, #f6f8fc);
+				border-color: #cfd8e6;
+			}
+
+			/* Hide foreground visual box (hero only, background removed) */
+			.visual {
+				display: none;
+			}
+
+			/* Sections */
+			section {
+				padding: 88px 0;
+			}
+			.section-title {
+				font-size: clamp(26px, 3.2vw, 40px);
+				margin: 0 0 10px;
+			}
+			.section-sub {
+				color: var(--ink-1);
+				max-width: 820px;
+				margin: 0 0 28px;
+			}
+
+			/* Cards — flatter, sharper */
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				gap: 16px;
+			}
+			.card {
+				grid-column: span 4;
+				background: #ffffff;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+				padding: 18px 18px 20px;
+				box-shadow: var(--shadow);
+			}
+			.card h3 {
+				margin: 2px 0 8px;
+				font-size: 18px;
+			}
+			.meta {
+				font-size: 12px;
+				color: var(--indigo);
+				font-weight: 700;
+				letter-spacing: 0.4px;
+				text-transform: uppercase;
+			}
+			.card p {
+				color: var(--ink-1);
+			}
+
+			/* About split */
+			.about {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+				align-items: start;
+			}
+			.panel {
+				background: #ffffff;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+				padding: 20px;
+				box-shadow: var(--shadow);
+			}
+
+			/* Portfolio */
+			.portfolio {
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				gap: 14px;
+			}
+			.tile {
+				grid-column: span 3;
+				background: #ffffff;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+				padding: 14px 16px;
+				min-height: 120px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			.chip {
+				display: inline-block;
+				font-size: 12px;
+				padding: 4px 8px;
+				border: 1px solid #cfd8e6;
+				border-radius: 999px;
+				background: #f6f8fc;
+				color: #263a72;
+			}
+			.fine {
+				color: #65738a;
+				font-size: 12px;
+			}
+
+			/* Contact */
+			.contact {
+				display: grid;
+				grid-template-columns: 0.9fr 1.1fr;
+				gap: 20px;
+			}
+			.field {
+				display: grid;
+				gap: 6px;
+				margin-bottom: 12px;
+			}
+			input,
+			textarea {
+				background: #fff;
+				color: var(--ink-0);
+				border: 1px solid var(--line);
+				border-radius: 6px;
+				padding: 10px 12px;
+				font: inherit;
+			}
+			textarea {
+				min-height: 120px;
+				resize: vertical;
+			}
+
+			footer {
+				padding: 52px 0 36px;
+				color: var(--ink-1);
+				border-top: 1px solid var(--line);
+			}
+
+			/* Minimal reveal */
+			.reveal {
+				opacity: 0;
+				transform: translateY(8px);
+				transition: opacity 0.5s ease, transform 0.5s ease;
+			}
+			.reveal.on {
+				opacity: 1;
+				transform: none;
+			}
+
+			/* Controls panel */
+			#sim-controls {
+				position: fixed;
+				right: 16px;
+				bottom: 16px;
+				width: 320px;
+				z-index: 1000;
+				background: #fff;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+				box-shadow: var(--shadow);
+			}
+			#sim-controls header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px 12px;
+				border-bottom: 1px solid var(--line);
+				background: #f6f8fc;
+			}
+			#sim-controls .body {
+				max-height: 60svh;
+				overflow: auto;
+				padding: 10px 12px;
+			}
+			#sim-controls label {
+				display: flex;
+				justify-content: space-between;
+				gap: 10px;
+				font-size: 12px;
+				color: #33415c;
+				margin: 8px 0 4px;
+			}
+			#sim-controls input[type='range'] {
+				width: 100%;
+			}
+			#sim-controls input[type='number'] {
+				width: 90px;
+			}
+			#sim-controls .row {
+				display: flex;
+				gap: 8px;
+				align-items: center;
+			}
+			#sim-controls .actions {
+				display: flex;
+				gap: 8px;
+				padding: 10px 12px;
+				border-top: 1px solid var(--line);
+			}
+			#sim-controls button {
+				padding: 8px 10px;
+				border: 1px solid var(--line);
+				background: #fff;
+				border-radius: 6px;
+				font-weight: 600;
+				cursor: pointer;
+			}
+			#sim-controls .muted {
+				opacity: 0.7;
+			}
+
+			/* Responsive */
+			@media (max-width: 1000px) {
+				.hero-wrap {
+					grid-template-columns: 1fr;
+					min-height: 64svh;
+				}
+				.cards .card {
+					grid-column: span 6;
+				}
+				.about {
+					grid-template-columns: 1fr;
+				}
+				.contact {
+					grid-template-columns: 1fr;
+				}
+				.tile {
+					grid-column: span 4;
+				}
+				#sim-controls {
+					width: calc(100% - 24px);
+					right: 12px;
+					left: 12px;
+				}
+			}
+			@media (max-width: 640px) {
+				.cards .card {
+					grid-column: span 12;
+				}
+				.tile {
+					grid-column: span 6;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.reveal {
+					transition: none;
+				}
+			}
+
+			/* dot motif: subtle overlay that nods to the hero “particles” */
+			.panel.dotted {
+				position: relative;
+				overflow: hidden;
+			}
+			.panel.dotted::after {
+				content: '';
+				position: absolute;
+				right: -36px;
+				top: -36px;
+				width: 340px;
+				height: 340px;
+				pointer-events: none;
+				background: radial-gradient(
+							circle,
+							rgba(39, 62, 122, 0.16) 1px,
+							transparent 1.2px
+						)
+						0 0/12px 12px,
+					radial-gradient(
+							circle,
+							rgba(75, 43, 191, 0.12) 1px,
+							transparent 1.2px
+						)
+						6px 6px/12px 12px;
+				transform: rotate(12deg);
+				filter: saturate(120%);
+			}
+
+			.about-pro .about-lede {
+				max-width: 72ch;
+				margin: 0 0 0.6rem;
+				font-size: clamp(1rem, 0.45vw + 1rem, 1.2rem);
+				color: var(--ink-1);
+			}
+			.about-pro .about-meta {
+				margin: 0 0 clamp(24px, 4vw, 44px);
+			}
+
+			/* Split layout */
+			.about-pro .about-split {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+				align-items: start;
+			}
+			@media (max-width: 980px) {
+				.about-pro .about-split {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			#about.about-pro {
+				padding-block: clamp(56px, 8vw, 96px);
+			}
+			#about .section-title {
+				margin: 0 0 0.6rem;
+			}
+			#about .about-lede {
+				max-width: 72ch;
+				margin: 0 0 0.6rem;
+				font-size: clamp(1rem, 0.45vw + 1rem, 1.2rem);
+				color: var(--ink-1);
+			}
+			#about .about-meta {
+				margin: 0 0 clamp(24px, 4vw, 44px);
+			}
+
+			/* Flow: full-width who, then 2-up pair */
+			#about .about-flow {
+				display: grid;
+				gap: 20px;
+			}
+			#about .who h3 {
+				font-size: 1rem;
+				font-weight: 700;
+				margin: 0 0 0.6rem;
+				letter-spacing: 0.01em;
+			}
+			#about .who p {
+				margin: 0 0 1rem;
+			}
+
+			#about .about-pair {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+				align-items: start;
+			}
+			@media (max-width: 980px) {
+				#about .about-pair {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Panels reuse global .panel; minor tweaks */
+			#about .panel h3 {
+				margin: 2px 0 8px;
+				font-size: 1rem;
+				font-weight: 700;
+			}
+			#about .bullets {
+				margin: 0;
+				padding-left: 18px;
+				display: grid;
+				gap: 8px;
+			}
+
+			/* Funnel highlight & transitions */
+			#items path,
+			#items text {
+				transition: fill 0.35s ease, stroke 0.35s ease, opacity 0.35s ease;
+			}
+			/* Optional subtle emphasis on active wedge outline */
+			#items .wedge-active path[stroke] {
+				stroke-width: 3 !important;
+			}
+			#items .wedge-inactive path[stroke] {
+				stroke-width: 2 !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Hero -->
+		<section id="hero" class="hero" aria-label="Hero">
+			<canvas id="heroblob" class="hero-canvas" aria-hidden="true"></canvas>
+			<div class="bands" aria-hidden="true"></div>
+			<div class="container hero-wrap" style="position: relative; z-index: 1">
+				<div style="margin: 2rem">
+					<h1 class="reveal">
+						<span class="accent">The Road to Exceptional Outcomes</span>
+					</h1>
+					<p class="sub reveal">
+						Research-led, Disciplined, High-conviction investments.
+					</p>
+					<p class="sub reveal" style="opacity: 0.75">by invitation only.</p>
+					<!-- <div class="cta reveal">
+						<a class="btn primary" href="#strategy">Explore our strategy</a>
+						<a class="btn" href="#contact">Request an IM</a>
+					</div> -->
+				</div>
+				<div class="visual reveal" aria-hidden="true"></div>
+			</div>
+		</section>
+
+		<!-- About – conservative, panel-aligned (serious fund style) -->
+		<section id="about" class="about-pro" aria-labelledby="about-title">
+			<div class="container">
+				<h2 id="about-title" class="section-title reveal">About Poath Road</h2>
+				<div class="about-pair">
+					<div>
+						<p class="about-lede reveal">
+							We are a research-led investment partnership based in Melbourne.
+							We pursue high-conviction opportunities with prudent risk
+							controls. When a core thesis is earned, we act decisively; when
+							odds are unfavourable, we do nothing.
+						</p>
+						<p class="about-lede reveal">
+							We concentrate in quality businesses with persistent advantages or
+							structural opportunities. The portfolio is focused and positions
+							are typically held for greater than 1 year. Liquidity and downside
+							dynamics drive position sizing: we scale in deliberately, trim
+							when risk rises, and exit when the thesis changes.
+						</p>
+						<p class="about-lede reveal">
+							Our process blends bottom-up research with continous persistent
+							monitoring. Assumptions, catalysts, and risks are recorded up
+							front, then audited against outcomes. Our edge is research depth
+							and flexibility; the ability to move at speed when warranted,
+							remain patient when it isn’t, and continually stress-test ideas to
+							keep only our best.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer style="padding: 1rem">
+			<div
+				class="container"
+				style="
+					display: flex;
+					justify-content: space-between;
+					gap: 0.5rem;
+
+					flex-wrap: wrap;
+				">
+				<div style="opacity: 0.75; font-size: small">
+					Poath Road © <span>Melbourne, Australia</span>
+				</div>
+
+				<div style="opacity: 0.75; text-align: right; font-size: small">
+					This page is informational only and does not constitute an offer or
+					solicitation.
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// =============================
+			// Config & System (declared FIRST to avoid TDZ errors)
+			// =============================
+
+			// Global config defaults (UPDATED to your tuned values)
+			const defaultCfg = {
+				speed: 1.2,
+				kCluster: 0.008,
+				kScatter: 0.001,
+				damping: 0.976,
+				scatterStrength: 1.5,
+				intervalMin: 6,
+				intervalMax: 12,
+				bgN: 1000,
+				pointSize: 1.3,
+				lineAlpha: 0.05,
+				lineStep: 8,
+			};
+			let cfg = { ...defaultCfg };
+
+			// The animation system handle — declare BEFORE any usage
+			let system = null;
+
+			// Utility for quick asserts (simple runtime tests)
+			function assert(cond, msg) {
+				if (!cond) {
+					console.error('[ASSERT]', msg);
+				}
+			}
+
+			// =============================
+			// Year + reveal (UI only)
+			// =============================
+			const yrEl = document.getElementById('yr');
+			if (yrEl) yrEl.textContent = new Date().getFullYear();
+
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((e) => {
+						if (e.isIntersecting) {
+							e.target.classList.add('on');
+							io.unobserve(e.target);
+						}
+					});
+				},
+				{ threshold: 0.12 }
+			);
+			document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+			// =============================
+			// Blob system (hero‑scoped)
+			// =============================
+			function startSystem() {
+				if (system && system.destroy) system.destroy();
+				const canvas = document.getElementById('heroblob');
+				const host = document.getElementById('hero');
+				assert(!!canvas && !!host, 'Hero canvas or host missing');
+				system = createBlobSystem(canvas, cfg.bgN, host);
+				// Basic runtime tests
+				setTimeout(() => {
+					assert(!!system, 'System failed to initialise');
+					assert(
+						typeof system.pause === 'function' &&
+							typeof system.resume === 'function',
+						'System API incomplete'
+					);
+				}, 0);
+			}
+
+			// Overdamped, position‑based motion (no spring), smooth mode blend
+			function createBlobSystem(canvas, N, host) {
+				const ctx = canvas.getContext('2d');
+				assert(!!ctx, '2D context not available');
+
+				let DPR = Math.min(2, window.devicePixelRatio || 1);
+				function sizeFromHost() {
+					const rect = host.getBoundingClientRect();
+					return {
+						w: Math.max(1, Math.floor(rect.width)),
+						h: Math.max(1, Math.floor(rect.height)),
+					};
+				}
+				function resize() {
+					DPR = Math.min(2, window.devicePixelRatio || 1);
+					const { w, h } = sizeFromHost();
+					canvas.style.width = w + 'px';
+					canvas.style.height = h + 'px';
+					canvas.width = Math.max(1, Math.floor(w * DPR));
+					canvas.height = Math.max(1, Math.floor(h * DPR));
+				}
+				resize();
+				const ro = new ResizeObserver(() => resize());
+				ro.observe(host);
+				window.addEventListener('resize', resize);
+
+				const c1 = '#0e1b3a',
+					c2 = '#4b2bbf';
+				const parts = new Array(N);
+				const rnd = (a, b) => a + Math.random() * (b - a);
+				let t = 0;
+
+				function targetPos(i) {
+					const W = canvas.width,
+						H = canvas.height;
+					const cx = W * 0.5,
+						cy = H * 0.5;
+					const ang =
+						(i / N) * Math.PI * 2 + Math.sin(t * 0.00035 * cfg.speed) * 0.5;
+					const rBase = Math.min(W, H) * 0.24;
+					const r =
+						rBase *
+						(1 +
+							0.05 * Math.sin(3 * ang + t * 0.001 * cfg.speed) +
+							0.03 * Math.cos(5 * ang - t * 0.0012 * cfg.speed));
+					return { x: cx + Math.cos(ang) * r, y: cy + Math.sin(ang) * r };
+				}
+
+				// Start fully scattered (chaotic)
+				for (let i = 0; i < N; i++) {
+					const W = canvas.width,
+						H = canvas.height;
+					parts[i] = { x: rnd(0, W), y: rnd(0, H), phase: rnd(0, Math.PI * 2) };
+				}
+				assert(parts.length === N, 'Particle array length mismatch');
+
+				// Mode blend 0..1 (no impulses)
+				let cohere = 0; // scattered
+				let desired = 1; // first move toward cluster
+				let nextToggleAt =
+					performance.now() +
+					(cfg.intervalMin +
+						Math.random() * (cfg.intervalMax - cfg.intervalMin)) *
+						1000;
+				let noiseAmp = cfg.scatterStrength;
+
+				const posMod = (k, m) => ((k % m) + m) % m;
+
+				let raf = null,
+					paused = false;
+				function step(now) {
+					if (paused) {
+						raf = requestAnimationFrame(step);
+						return;
+					}
+					t += 16.6 * cfg.speed;
+					if (now > nextToggleAt) {
+						desired = desired === 1 ? 0 : 1;
+						nextToggleAt =
+							performance.now() +
+							(cfg.intervalMin +
+								Math.random() * (cfg.intervalMax - cfg.intervalMin)) *
+								1000;
+					}
+
+					// Smooth blend, no pulse
+					const ease = 0.02 * cfg.speed;
+					cohere += (desired - cohere) * ease;
+					if (desired < 0.5) noiseAmp = Math.max(noiseAmp, cfg.scatterStrength);
+					else noiseAmp *= 0.96;
+
+					const W = canvas.width,
+						H = canvas.height; // compute once per frame
+					assert(W > 0 && H > 0, 'Canvas size invalid');
+					const cx = W * 0.5,
+						cy = H * 0.5;
+					const k = cfg.kScatter + (cfg.kCluster - cfg.kScatter) * cohere; // direct position gain
+					const outBias = (1 - cohere) * 0.0015;
+
+					for (let i = 0; i < N; i++) {
+						const p = parts[i];
+						const tp = targetPos(i);
+						const u = p.x * 0.001 + t * 0.0002 + p.phase * 0.6;
+						const v = p.y * 0.0009 - t * 0.00018 + p.phase * 0.45;
+						const fx =
+							0.14 * Math.sin(u * 2.0) +
+							0.1 * Math.cos(v * 1.6) +
+							(Math.random() - 0.5) * noiseAmp * 0.015;
+						const fy =
+							0.12 * Math.cos(u * 1.9) -
+							0.1 * Math.sin(v * 1.8) +
+							(Math.random() - 0.5) * noiseAmp * 0.015;
+						p.x += (tp.x - p.x) * k + fx + (p.x - cx) * outBias;
+						p.y += (tp.y - p.y) * k + fy + (p.y - cy) * outBias;
+					}
+
+					// Render (reuse W & H; do NOT redeclare)
+					ctx.clearRect(0, 0, W, H);
+					ctx.globalCompositeOperation = 'lighter';
+					const grad = ctx.createLinearGradient(0, 0, W, H);
+					grad.addColorStop(0, c1);
+					grad.addColorStop(1, c2);
+					ctx.strokeStyle = grad;
+					ctx.fillStyle = grad;
+					const rPoint = Math.max(1.0, cfg.pointSize * 0.8);
+					ctx.lineWidth = 1 * Math.min(2, window.devicePixelRatio || 1);
+					for (let i = 0; i < N; i++) {
+						const p = parts[i];
+						ctx.beginPath();
+						ctx.arc(p.x, p.y, rPoint, 0, Math.PI * 2);
+						ctx.fill();
+					}
+					for (let i = 0; i < N; i += cfg.lineStep) {
+						const a = parts[i];
+						const j = posMod(i + Math.floor(18 * Math.sin(i + t * 0.0006)), N);
+						const b = parts[j];
+						ctx.globalAlpha = cfg.lineAlpha;
+						ctx.beginPath();
+						ctx.moveTo(a.x, a.y);
+						ctx.lineTo(b.x, b.y);
+						ctx.stroke();
+					}
+					ctx.globalAlpha = 1;
+
+					raf = requestAnimationFrame(step);
+				}
+
+				raf = requestAnimationFrame(step);
+				return {
+					destroy() {
+						cancelAnimationFrame(raf);
+						window.removeEventListener('resize', resize);
+						ro.disconnect();
+					},
+					pause() {
+						paused = true;
+					},
+					resume() {
+						paused = false;
+					},
+				};
+			}
+
+			// =============================
+			// Controls wiring (after system var exists)
+			// Set inputs from cfg first so the UI matches code defaults
+			(function seedControls() {
+				const ids = [
+					'apply',
+					'pause',
+					'copy',
+					'toggle-controls',
+					'cfg-speed',
+					'cfg-speed-num',
+					'cfg-kc',
+					'cfg-kc-num',
+					'cfg-ks',
+					'cfg-ks-num',
+					'cfg-damp',
+					'cfg-damp-num',
+					'cfg-scatter',
+					'cfg-scatter-num',
+					'cfg-int-min',
+					'cfg-int-max',
+					'cfg-bgN',
+					'cfg-pt',
+					'cfg-pt-num',
+					'cfg-la',
+					'cfg-la-num',
+					'cfg-ls',
+				];
+				ids.forEach((id) =>
+					assert(!!document.getElementById(id), `Missing control: #${id}`)
+				);
+
+				const map = [
+					['cfg-speed', cfg.speed],
+					['cfg-speed-num', cfg.speed],
+					['cfg-kc', cfg.kCluster],
+					['cfg-kc-num', cfg.kCluster],
+					['cfg-ks', cfg.kScatter],
+					['cfg-ks-num', cfg.kScatter],
+					['cfg-damp', cfg.damping],
+					['cfg-damp-num', cfg.damping],
+					['cfg-scatter', cfg.scatterStrength],
+					['cfg-scatter-num', cfg.scatterStrength],
+					['cfg-int-min', cfg.intervalMin],
+					['cfg-int-max', cfg.intervalMax],
+					['cfg-bgN', cfg.bgN],
+					['cfg-pt', cfg.pointSize],
+					['cfg-pt-num', cfg.pointSize],
+					['cfg-la', cfg.lineAlpha],
+					['cfg-la-num', cfg.lineAlpha],
+					['cfg-ls', cfg.lineStep],
+				];
+				map.forEach(([id, val]) => {
+					const el = document.getElementById(id);
+					if (el) el.value = val;
+				});
+			})();
+
+			// =============================
+			const $ = (id) => document.getElementById(id);
+			const linkPair = (range, num, key) => {
+				const r = $(range),
+					n = $(num);
+				if (!r || !n) {
+					console.warn('Skipping linkPair for', range, num);
+					return;
+				}
+				const sync = (from) => {
+					if (from === r) {
+						n.value = r.value;
+					} else {
+						r.value = n.value;
+					}
+					cfg[key] = parseFloat(r.value);
+				};
+				r.addEventListener('input', () => sync(r));
+				n.addEventListener('input', () => sync(n));
+				sync(r);
+			};
+
+			linkPair('cfg-speed', 'cfg-speed-num', 'speed');
+			linkPair('cfg-kc', 'cfg-kc-num', 'kCluster');
+			linkPair('cfg-ks', 'cfg-ks-num', 'kScatter');
+			linkPair('cfg-damp', 'cfg-damp-num', 'damping');
+			linkPair('cfg-scatter', 'cfg-scatter-num', 'scatterStrength');
+			linkPair('cfg-pt', 'cfg-pt-num', 'pointSize');
+			linkPair('cfg-la', 'cfg-la-num', 'lineAlpha');
+
+			const safeOn = (id, evt, fn) => {
+				const el = $(id);
+				if (el) {
+					el.addEventListener(evt, fn);
+				} else {
+					console.warn('Listener skipped for', id);
+				}
+			};
+
+			safeOn('cfg-int-min', 'input', () => {
+				cfg.intervalMin = Math.max(
+					2,
+					parseInt($('cfg-int-min').value || 6, 10)
+				);
+			});
+			safeOn('cfg-int-max', 'input', () => {
+				cfg.intervalMax = Math.max(
+					cfg.intervalMin + 1,
+					parseInt($('cfg-int-max').value || 12, 10)
+				);
+			});
+			safeOn('cfg-bgN', 'input', () => {
+				cfg.bgN = Math.max(100, parseInt($('cfg-bgN').value || 1000, 10));
+			});
+
+			safeOn('apply', 'click', () => {
+				startSystem();
+			});
+
+			safeOn('pause', 'click', () => {
+				if (!system) return;
+				const btn = $('pause');
+				if (btn.textContent === 'Pause') {
+					system.pause();
+					btn.textContent = 'Resume';
+				} else {
+					system.resume();
+					btn.textContent = 'Pause';
+				}
+			});
+
+			safeOn('copy', 'click', async () => {
+				const toCopy = JSON.stringify(cfg, null, 2);
+				try {
+					await navigator.clipboard.writeText(toCopy);
+					alert(
+						'Settings copied to clipboard. Paste them into code to hard‑code.'
+					);
+				} catch {
+					prompt('Copy these settings:', toCopy);
+				}
+			});
+
+			safeOn('toggle-controls', 'click', () => {
+				const panel = document.getElementById('sim-controls');
+				if (panel.dataset.hidden === '1') {
+					panel.dataset.hidden = '0';
+					panel.querySelector('.body').style.display = '';
+					panel.querySelector('.actions').style.display = '';
+					$('toggle-controls').textContent = 'Hide';
+				} else {
+					panel.dataset.hidden = '1';
+					panel.querySelector('.body').style.display = 'none';
+					panel.querySelector('.actions').style.display = 'none';
+					$('toggle-controls').textContent = 'Show';
+				}
+			});
+
+			// Start AFTER definitions to avoid TDZ
+			startSystem();
+
+			(function () {
+				const el = document.getElementById('perf-date');
+				if (!el) return;
+				const d = new Date();
+				const q = Math.floor(d.getMonth() / 3);
+				const qEndMonth = [2, 5, 8, 11][q];
+				const dt = new Date(d.getFullYear(), qEndMonth + 1, 0);
+				el.textContent = new Intl.DateTimeFormat('en-AU', {
+					day: '2-digit',
+					month: 'short',
+					year: 'numeric',
+				}).format(dt);
+			})();
+
+			// Build synthetic monthly-ish data around your path and S&P-like benchmarks
+			(function () {
+				const host = document.getElementById('perf-chart');
+				if (!host) return;
+
+				// Keyframes (index = 100 start). Dates approximate; chart is illustrative only.
+				const kf = [
+					{ d: '2024-07-01', v: 100.0 },
+					{ d: '2024-12-13', v: 138.0 }, // peak ~38%
+					{ d: '2025-02-19', v: 140.0 }, // sideways
+					{ d: '2025-04-20', v: 100.0 }, // back to 0%
+					{ d: '2025-06-30', v: 151.51 }, // finish +51.51%
+				];
+
+				// Helper: interpolate between keyframes to ~24 points for a smooth line
+				function interpolateKF(keys, points) {
+					const out = [];
+					for (let i = 0; i < keys.length - 1; i++) {
+						const a = keys[i],
+							b = keys[i + 1];
+						const steps = Math.max(1, Math.floor(points / (keys.length - 1)));
+						for (let s = 0; s < steps; s++) {
+							const t = s / steps;
+							out.push(a.v + (b.v - a.v) * t);
+						}
+					}
+					out.push(keys[keys.length - 1].v);
+					return out;
+				}
+
+				const dataComposite = interpolateKF(kf, 24);
+
+				// Benchmarks follow a gentler S&P-like curve with the same dip in April
+				// SPY (AUD-hedged) stronger than XKO overall
+				const dataSPY = dataComposite.map((_, i) => {
+					const t = i / (dataComposite.length - 1);
+					// end about +28%, similar shape but muted
+					const target = 100 + 28 * t;
+					// add April dip (~-10%) centred around 20 Apr window
+					const dip = Math.exp(-Math.pow((t - 0.75) / 0.08, 2)) * 10; // bell dip
+					return target - dip;
+				});
+
+				const dataXKO = dataComposite.map((_, i) => {
+					const t = i / (dataComposite.length - 1);
+					const target = 100 + 14 * t; // end ~+14%
+					const dip = Math.exp(-Math.pow((t - 0.75) / 0.1, 2)) * 8;
+					return target - dip;
+				});
+
+				// Normalise series so they all start at 100
+				function normalise(arr) {
+					const base = arr[0] || 100;
+					return arr.map((v) => (v / base) * 100);
+				}
+				const comp = normalise(dataComposite);
+				const xko = normalise(dataXKO);
+				const spy = normalise(dataSPY);
+
+				const W = host.clientWidth || 800,
+					H = host.clientHeight || 240,
+					P = 24;
+				const minVal = Math.min(...comp, ...xko, ...spy);
+				const maxVal = Math.max(...comp, ...xko, ...spy);
+				const x = (i) => P + (i * (W - 2 * P)) / (comp.length - 1);
+				const y = (v) =>
+					H - P - ((v - minVal) * (H - 2 * P)) / (maxVal - minVal || 1);
+				const pathStr = (arr) =>
+					arr.map((v, i) => (i ? 'L' : 'M') + x(i) + ',' + y(v)).join(' ');
+
+				const svg = `
+      <svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Performance chart">
+        <rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>
+        <g opacity="0.6">
+          ${[0.25, 0.5, 0.75]
+						.map((p) => {
+							const yy = P + p * (H - 2 * P);
+							return `<line x1="${P}" y1="${yy}" x2="${
+								W - P
+							}" y2="${yy}" stroke="#e6ecf5" stroke-width="1"/>`;
+						})
+						.join('')}
+        </g>
+        <path d="${pathStr(
+					xko
+				)}" fill="none" stroke="#b8c2d6" stroke-width="2"/>
+        <path d="${pathStr(
+					spy
+				)}" fill="none" stroke="#9ecbff" stroke-width="2"/>
+        <path d="${pathStr(
+					comp
+				)}" fill="none" stroke="#4b2bbf" stroke-width="2.6"/>
+        <g font-size="12" fill="#445" font-family="Inter,system-ui,Arial">
+          <rect x="${W - P - 230}" y="${
+					P - 16
+				}" width="230" height="50" rx="6" ry="6" fill="#f7f9fc" stroke="#d7dfeb"/>
+          <circle cx="${W - P - 218}" cy="${
+					P - 8
+				}" r="4" fill="#4b2bbf"/><text x="${W - P - 208}" y="${
+					P - 4
+				}">Composite (net)</text>
+          <circle cx="${W - P - 218}" cy="${
+					P + 8
+				}" r="4" fill="#b8c2d6"/><text x="${W - P - 208}" y="${
+					P + 12
+				}">S&amp;P/ASX 200 (XKO)</text>
+          <circle cx="${W - P - 218}" cy="${
+					P + 24
+				}" r="4" fill="#9ecbff"/><text x="${W - P - 208}" y="${
+					P + 28
+				}">S&amp;P 500 (SPY, AUD-hedged)</text>
+        </g>
+      </svg>`;
+				host.innerHTML = svg;
+			})();
+		</script>
+	</body>
+</html>
