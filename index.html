@@ -27,6 +27,33 @@
 			* {
 				box-sizing: border-box;
 			}
+
+						/* Glass panel */
+			.glass-panel{
+			  /* layout */
+			  padding: 1.25rem;
+			  border-radius: 16px;
+			
+			  /* glass look */
+			  background:
+			    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+			  border: 1px solid rgba(255,255,255,0.28);
+			  backdrop-filter: blur(14px) saturate(140%);
+			  -webkit-backdrop-filter: blur(14px) saturate(140%); /* Safari */
+			
+			  /* depth */
+			  box-shadow: 0 10px 30px rgba(14,27,58,0.12);
+			}
+			
+			/* Optional: darker variant for light backgrounds */
+			.glass-panel.glass-dark{
+			  background:
+			    linear-gradient(180deg, rgba(14,27,58,0.22), rgba(14,27,58,0.10));
+			  border-color: rgba(255,255,255,0.18);
+			  color: #0b1220;
+			}
+
+			
 			html,
 			body {
 				height: 100%;
@@ -555,7 +582,7 @@
 			<canvas id="heroblob" class="hero-canvas" aria-hidden="true"></canvas>
 			<div class="bands" aria-hidden="true"></div>
 			<div class="container hero-wrap" style="position: relative; z-index: 1">
-				<div style="margin: 2rem">
+				<div style="margin: 2rem" class="glass-panel glass-dark">
 					<h1 class="reveal">
 						<span class="accent">Poath Road</span>
 					</h1>
