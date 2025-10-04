@@ -39,7 +39,7 @@
 			    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
 			  border: 1px solid rgba(255,255,255,0.28);
 			  backdrop-filter: blur(14px) saturate(140%);
-			  -webkit-backdrop-filter: blur(14px) saturate(140%); /* Safari */
+			  -webkit-backdrop-filter: blur(4px) saturate(140%); /* Safari */
 			
 			  /* depth */
 			  box-shadow: 0 10px 30px rgba(14,27,58,0.12);
@@ -647,16 +647,16 @@
 
 			// Global config defaults (UPDATED to your tuned values)
 			const defaultCfg = {
-				speed: 5,
+				speed: 2,
 				kCluster: 0.01,
 				kScatter: 0.001,
 				damping: 0.9,
-				scatterStrength: 1.8,
-				intervalMin: 3,
-				intervalMax: 3,
+				scatterStrength: 1.0,
+				intervalMin: 2,
+				intervalMax: 6,
 				bgN: 1000,
-				pointSize: 1.6,
-				lineAlpha: 0.1,
+				pointSize: 2,
+				lineAlpha: 0.05,
 				lineStep: 8,
 			};
 			let cfg = { ...defaultCfg };
