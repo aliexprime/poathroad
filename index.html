@@ -28,32 +28,46 @@
 				box-sizing: border-box;
 			}
 
-						/* Glass panel */
-			.glass-panel{
-			  /* layout */
-			  padding: 1.25rem;
-			  border-radius: 16px;
-			
-			  /* glass look */
-			  background:
-			    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
-			  border: 1px solid rgba(255,255,255,0.28);
-			  backdrop-filter: blur(4px) saturate(140%);
-			  -webkit-backdrop-filter: blur(4px) saturate(140%); /* Safari */
-			
-			  /* depth */
-			  box-shadow: 0 10px 30px rgba(14,27,58,0.12);
-			}
-			
-			/* Optional: darker variant for light backgrounds */
-			.glass-panel.glass-dark{
-			  background:
-			    linear-gradient(180deg, rgba(14,27,58,0.22), rgba(14,27,58,0.10));
-			  border-color: rgba(255,255,255,0.18);
-			  color: #0b1220;
+			.greystyle {
+				color: grey;
+				font-weight: 1rem;
+				font-style: italic;
+				opacity: 0.7;
 			}
 
-			
+			.rounded {
+				border-radius: 12px;
+			}
+			/* Glass panel */
+			.glass-panel {
+				/* layout */
+				padding: 1rem 1.75rem;
+
+				/* glass look */
+				background: linear-gradient(
+					180deg,
+					rgba(255, 255, 255, 0.16),
+					rgba(255, 255, 255, 0.06)
+				);
+				border: solid rgba(255, 255, 255, 0.28);
+				backdrop-filter: blur(4px) saturate(140%);
+				-webkit-backdrop-filter: blur(4px) saturate(140%); /* Safari */
+
+				/* depth */
+				box-shadow: 0 10px 30px rgba(14, 27, 58, 0.12);
+			}
+
+			/* Optional: darker variant for light backgrounds */
+			.glass-panel.glass-dark {
+				background: linear-gradient(
+					180deg,
+					rgba(14, 27, 58, 0.22),
+					rgba(14, 27, 58, 0.1)
+				);
+				border-color: rgba(255, 255, 255, 0.18);
+				color: #0b1220;
+			}
+
 			html,
 			body {
 				height: 100%;
@@ -78,7 +92,7 @@
 
 			/* Hero canvas (scoped to hero section) */
 			.hero-canvas {
-				position: absolute;
+				position: fixed;
 				inset: 0;
 				width: 100%;
 				height: 100%;
@@ -88,14 +102,7 @@
 			}
 
 			/* Header */
-			header {
-				position: sticky;
-				top: 0;
-				z-index: 40;
-				background: rgba(247, 249, 252, 0.8);
-				backdrop-filter: saturate(120%) blur(8px);
-				border-bottom: 1px solid var(--line);
-			}
+
 			.nav {
 				display: flex;
 				align-items: center;
@@ -574,22 +581,36 @@
 			#items .wedge-inactive path[stroke] {
 				stroke-width: 2 !important;
 			}
+
+			.fadein {
+				opacity: 0;
+				animation: fadein 3s ease forwards;
+			}
+
+			@keyframes fadein {
+				to {
+					opacity: 1;
+				}
+			}
 		</style>
 	</head>
-	<body>
+	<body class="">
+		<canvas
+			id="heroblob"
+			class="hero-canvas fadein"
+			aria-hidden="true"></canvas>
 		<!-- Hero -->
 		<section id="hero" class="hero" aria-label="Hero">
-			<canvas id="heroblob" class="hero-canvas" aria-hidden="true"></canvas>
 			<div class="bands" aria-hidden="true"></div>
 			<div class="container hero-wrap" style="position: relative; z-index: 1">
-				<div style="margin: 2rem" class="glass-panel">
+				<div style="margin: 2rem" class="glass-panel rounded">
 					<h1 class="reveal">
 						<span class="accent">Poath Road</span>
 					</h1>
 					<p class="sub reveal">
 						Research-led, High-conviction Global Equity Investments.
 					</p>
-					<p class="sub reveal">by invitation or referral.</p>
+					<p class="reveal greystyle">by invitation or referral.</p>
 					<!-- <div class="cta reveal">
 						<a class="btn primary" href="#strategy">Explore our strategy</a>
 						<a class="btn" href="#contact">Request an IM</a>
@@ -600,19 +621,34 @@
 		</section>
 
 		<!-- About – conservative, panel-aligned (serious fund style) -->
-		<section id="about" class="about-pro" aria-labelledby="about-title">
+		<section
+			id="about"
+			class="about-pro glass-panel"
+			aria-labelledby="about-title">
 			<div class="container">
 				<h2 id="about-title" class="section-title reveal">About Poath Road</h2>
 				<div class="about-pair">
 					<div>
 						<p class="about-lede reveal" style="margin-bottom: 1rem">
-							We invest because ownership buys time and choice. Equities let savings participate in real productivity rather than sit idle. Over long horizons, that participation compounds and helps protect purchasing power.
+							We invest because ownership buys time and choice. Equities let
+							savings participate in real productivity rather than sit idle.
+							Over long horizons, that participation compounds and helps protect
+							purchasing power.
 						</p>
 						<p class="about-lede reveal" style="margin-bottom: 1rem">
-							Poath Road was founded on a simple idea: as market access grows and more capital flows into index funds, the value of genuine price discovery increases. We aim to capture that with a proprietary investment and research process, disciplined execution, and a total-return objective.
+							Poath Road was founded on a simple idea: as market access grows
+							and more capital flows into index funds, the value of genuine
+							price discovery increases. We aim to capture that with a
+							proprietary investment and research process, disciplined
+							execution, and a total-return objective.
 						</p>
 						<p class="about-lede reveal" style="margin-bottom: 1rem">
-							We focus on a small number of opportunities we understand. We prefer durable businesses with structural tailwinds and aligned owners. The portfolio is concentrated and positions are typically held for years. We avoid leverage and unnecessary complexity. We size positions for liquidity and downside, act when the odds are in our favour, and wait when they are not.
+							We focus on a small number of opportunities we understand. We
+							prefer durable businesses with structural tailwinds and aligned
+							owners. The portfolio is concentrated and positions are typically
+							held for years. We avoid leverage and unnecessary complexity. We
+							size positions for liquidity and downside, act when the odds are
+							in our favour, and wait when they are not.
 						</p>
 					</div>
 				</div>
@@ -642,10 +678,8 @@
 
 		<script>
 			// =============================
-			// Config & System (declared FIRST to avoid TDZ errors)
+			// Config & System
 			// =============================
-
-			// Global config defaults (UPDATED to your tuned values)
 			const defaultCfg = {
 				speed: 2,
 				kCluster: 0.01,
@@ -655,43 +689,53 @@
 				intervalMin: 2,
 				intervalMax: 6,
 				bgN: 1000,
-				pointSize: 2,
+				pointSize: 3,
 				lineAlpha: 0.05,
-				lineStep: 8,
+				lineStep: 4,
+
+				// Keep variance/fade; we'll avoid per-frame filters
+				pointSizeJitter: 0.9,
+				fadeInSpeed: 0.04,
+				focusBias: 0.55,
+
+				// Sprite/blur settings
+				dotBuckets: 3, // number of blur levels (3 is enough)
+				spriteBase: 8,
+				// Torus + camera
+				torusMajor: 0.34, // major radius as fraction of min(canvas)
+				torusMinor: 0.12, // minor radius as fraction of min(canvas)
+				rotX: 0.0006, // radians per ms (scaled by cfg.speed)
+				rotY: 0.0009,
+				rotZ: 0.0003,
+				fov: 800, // perspective focal length (px)
+				zCam: 1.6,
 			};
 			let cfg = { ...defaultCfg };
-
-			// The animation system handle — declare BEFORE any usage
 			let system = null;
 
-			// Utility for quick asserts (simple runtime tests)
-			function assert(cond, msg) {
-				if (!cond) {
-					console.error('[ASSERT]', msg);
-				}
+			function assert(c, m) {
+				if (!c) console.error('[ASSERT]', m);
 			}
 
 			// =============================
-			// Year + reveal (UI only)
+			// UI bits (unchanged)
 			// =============================
 			const yrEl = document.getElementById('yr');
 			if (yrEl) yrEl.textContent = new Date().getFullYear();
-
 			const io = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((e) => {
+				(es) =>
+					es.forEach((e) => {
 						if (e.isIntersecting) {
 							e.target.classList.add('on');
 							io.unobserve(e.target);
 						}
-					});
-				},
+					}),
 				{ threshold: 0.12 }
 			);
 			document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
 			// =============================
-			// Blob system (hero‑scoped)
+			// Blob system
 			// =============================
 			function startSystem() {
 				if (system && system.destroy) system.destroy();
@@ -699,7 +743,6 @@
 				const host = document.getElementById('hero');
 				assert(!!canvas && !!host, 'Hero canvas or host missing');
 				system = createBlobSystem(canvas, cfg.bgN, host);
-				// Basic runtime tests
 				setTimeout(() => {
 					assert(!!system, 'System failed to initialise');
 					assert(
@@ -710,42 +753,38 @@
 				}, 0);
 			}
 
-			// Overdamped, position‑based motion (no spring), smooth mode blend
 			function createBlobSystem(canvas, N, host) {
 				const ctx = canvas.getContext('2d');
 				assert(!!ctx, '2D context not available');
 
 				let DPR = Math.min(2, window.devicePixelRatio || 1);
 				function sizeFromHost() {
-					const rect = host.getBoundingClientRect();
-					return {
-						w: Math.max(1, Math.floor(rect.width)),
-						h: Math.max(1, Math.floor(rect.height)),
-					};
+					const r = host.getBoundingClientRect();
+					return { w: Math.max(1, r.width | 0), h: Math.max(1, r.height | 0) };
 				}
 				function resize() {
 					DPR = Math.min(2, window.devicePixelRatio || 1);
 					const { w, h } = sizeFromHost();
 					canvas.style.width = w + 'px';
 					canvas.style.height = h + 'px';
-					canvas.width = Math.max(1, Math.floor(w * DPR));
-					canvas.height = Math.max(1, Math.floor(h * DPR));
+					canvas.width = Math.max(1, (w * DPR) | 0);
+					canvas.height = Math.max(1, (h * DPR) | 0);
 				}
 				resize();
-				const ro = new ResizeObserver(() => resize());
+				const ro = new ResizeObserver(resize);
 				ro.observe(host);
-				window.addEventListener('resize', resize);
+				addEventListener('resize', resize);
 
 				const c1 = '#0e1b3a',
 					c2 = '#4b2bbf';
-				const parts = new Array(N);
 				const rnd = (a, b) => a + Math.random() * (b - a);
+				const parts = new Array(N);
 				let t = 0;
 
 				function targetPos(i) {
 					const W = canvas.width,
 						H = canvas.height;
-					const cx = W * 0.5,
+					const cx = W * 1,
 						cy = H * 0.5;
 					const ang =
 						(i / N) * Math.PI * 2 + Math.sin(t * 0.00035 * cfg.speed) * 0.5;
@@ -758,24 +797,28 @@
 					return { x: cx + Math.cos(ang) * r, y: cy + Math.sin(ang) * r };
 				}
 
-				// Start fully scattered (chaotic)
+				// Init particles
 				for (let i = 0; i < N; i++) {
 					const W = canvas.width,
 						H = canvas.height;
-					parts[i] = { x: rnd(0, W), y: rnd(0, H), phase: rnd(0, Math.PI * 2) };
+					const jitter = 1 + (Math.random() * 2 - 1) * cfg.pointSizeJitter;
+					parts[i] = {
+						x: rnd(0, W),
+						y: rnd(0, H),
+						phase: rnd(0, Math.PI * 2),
+						r: Math.max(0.6, cfg.pointSize * jitter),
+						a: 0,
+					};
 				}
-				assert(parts.length === N, 'Particle array length mismatch');
 
-				// Mode blend 0..1 (no impulses)
-				let cohere = 0; // scattered
-				let desired = 1; // first move toward cluster
+				let cohere = 0,
+					desired = 1;
 				let nextToggleAt =
 					performance.now() +
 					(cfg.intervalMin +
 						Math.random() * (cfg.intervalMax - cfg.intervalMin)) *
 						1000;
 				let noiseAmp = cfg.scatterStrength;
-
 				const posMod = (k, m) => ((k % m) + m) % m;
 
 				let raf = null,
@@ -785,6 +828,7 @@
 						raf = requestAnimationFrame(step);
 						return;
 					}
+
 					t += 16.6 * cfg.speed;
 					if (now > nextToggleAt) {
 						desired = desired === 1 ? 0 : 1;
@@ -795,18 +839,21 @@
 								1000;
 					}
 
-					// Smooth blend, no pulse
 					const ease = 0.02 * cfg.speed;
 					cohere += (desired - cohere) * ease;
 					if (desired < 0.5) noiseAmp = Math.max(noiseAmp, cfg.scatterStrength);
 					else noiseAmp *= 0.96;
 
 					const W = canvas.width,
-						H = canvas.height; // compute once per frame
+						H = canvas.height;
 					assert(W > 0 && H > 0, 'Canvas size invalid');
 					const cx = W * 0.5,
 						cy = H * 0.5;
-					const k = cfg.kScatter + (cfg.kCluster - cfg.kScatter) * cohere; // direct position gain
+
+					for (let i = 0; i < N; i++)
+						parts[i].a = Math.min(1, parts[i].a + cfg.fadeInSpeed * cfg.speed);
+
+					const k = cfg.kScatter + (cfg.kCluster - cfg.kScatter) * cohere;
 					const outBias = (1 - cohere) * 0.0015;
 
 					for (let i = 0; i < N; i++) {
@@ -826,22 +873,37 @@
 						p.y += (tp.y - p.y) * k + fy + (p.y - cy) * outBias;
 					}
 
-					// Render (reuse W & H; do NOT redeclare)
+					// ---------- Render ----------
 					ctx.clearRect(0, 0, W, H);
-					ctx.globalCompositeOperation = 'lighter';
+					ctx.globalCompositeOperation = 'source-over'; // fastest
+
 					const grad = ctx.createLinearGradient(0, 0, W, H);
 					grad.addColorStop(0, c1);
 					grad.addColorStop(1, c2);
-					ctx.strokeStyle = grad;
 					ctx.fillStyle = grad;
-					const rPoint = Math.max(1.0, cfg.pointSize * 0.8);
+					ctx.strokeStyle = grad;
 					ctx.lineWidth = 1 * Math.min(2, window.devicePixelRatio || 1);
+
+					// Draw points here
+					const rPointBase = Math.max(0.8, cfg.pointSize * 0.8);
+					const minDim = Math.min(W, H) * 0.5 + 1;
 					for (let i = 0; i < N; i++) {
 						const p = parts[i];
+						const dx = p.x - cx,
+							dy = p.y - cy;
+						const dn = Math.hypot(dx, dy) / minDim;
+						const focus = Math.max(0, 1 - Math.abs(dn - cfg.focusBias) * 2);
+
+						ctx.globalAlpha = 0.15 + 0.85 * p.a * (0.4 + 0.6 * focus);
+						const rDraw = rPointBase * 0.5 + p.r * 0.5;
+
 						ctx.beginPath();
-						ctx.arc(p.x, p.y, rPoint, 0, Math.PI * 2);
+						ctx.arc(p.x, p.y, rDraw, 0, Math.PI * 2);
 						ctx.fill();
 					}
+					ctx.globalAlpha = 1;
+
+					// Lines
 					for (let i = 0; i < N; i += cfg.lineStep) {
 						const a = parts[i];
 						const j = posMod(i + Math.floor(18 * Math.sin(i + t * 0.0006)), N);
@@ -861,7 +923,7 @@
 				return {
 					destroy() {
 						cancelAnimationFrame(raf);
-						window.removeEventListener('resize', resize);
+						removeEventListener('resize', resize);
 						ro.disconnect();
 					},
 					pause() {
@@ -874,8 +936,8 @@
 			}
 
 			// =============================
-			// Controls wiring (after system var exists)
-			// Set inputs from cfg first so the UI matches code defaults
+			// Controls (unchanged)
+			// =============================
 			(function seedControls() {
 				const ids = [
 					'apply',
@@ -904,7 +966,6 @@
 				ids.forEach((id) =>
 					assert(!!document.getElementById(id), `Missing control: #${id}`)
 				);
-
 				const map = [
 					['cfg-speed', cfg.speed],
 					['cfg-speed-num', cfg.speed],
@@ -931,28 +992,20 @@
 				});
 			})();
 
-			// =============================
 			const $ = (id) => document.getElementById(id);
 			const linkPair = (range, num, key) => {
 				const r = $(range),
 					n = $(num);
-				if (!r || !n) {
-					console.warn('Skipping linkPair for', range, num);
-					return;
-				}
+				if (!r || !n) return;
 				const sync = (from) => {
-					if (from === r) {
-						n.value = r.value;
-					} else {
-						r.value = n.value;
-					}
+					if (from === r) n.value = r.value;
+					else r.value = n.value;
 					cfg[key] = parseFloat(r.value);
 				};
 				r.addEventListener('input', () => sync(r));
 				n.addEventListener('input', () => sync(n));
 				sync(r);
 			};
-
 			linkPair('cfg-speed', 'cfg-speed-num', 'speed');
 			linkPair('cfg-kc', 'cfg-kc-num', 'kCluster');
 			linkPair('cfg-ks', 'cfg-ks-num', 'kScatter');
@@ -961,36 +1014,28 @@
 			linkPair('cfg-pt', 'cfg-pt-num', 'pointSize');
 			linkPair('cfg-la', 'cfg-la-num', 'lineAlpha');
 
-			const safeOn = (id, evt, fn) => {
+			const on = (id, evt, fn) => {
 				const el = $(id);
-				if (el) {
-					el.addEventListener(evt, fn);
-				} else {
-					console.warn('Listener skipped for', id);
-				}
+				if (el) el.addEventListener(evt, fn);
 			};
-
-			safeOn('cfg-int-min', 'input', () => {
+			on('cfg-int-min', 'input', () => {
 				cfg.intervalMin = Math.max(
 					2,
 					parseInt($('cfg-int-min').value || 6, 10)
 				);
 			});
-			safeOn('cfg-int-max', 'input', () => {
+			on('cfg-int-max', 'input', () => {
 				cfg.intervalMax = Math.max(
 					cfg.intervalMin + 1,
 					parseInt($('cfg-int-max').value || 12, 10)
 				);
 			});
-			safeOn('cfg-bgN', 'input', () => {
+			on('cfg-bgN', 'input', () => {
 				cfg.bgN = Math.max(100, parseInt($('cfg-bgN').value || 1000, 10));
 			});
 
-			safeOn('apply', 'click', () => {
-				startSystem();
-			});
-
-			safeOn('pause', 'click', () => {
+			on('apply', 'click', startSystem);
+			on('pause', 'click', () => {
 				if (!system) return;
 				const btn = $('pause');
 				if (btn.textContent === 'Pause') {
@@ -1001,21 +1046,19 @@
 					btn.textContent = 'Pause';
 				}
 			});
-
-			safeOn('copy', 'click', async () => {
+			on('copy', 'click', async () => {
 				const toCopy = JSON.stringify(cfg, null, 2);
 				try {
 					await navigator.clipboard.writeText(toCopy);
 					alert(
-						'Settings copied to clipboard. Paste them into code to hard‑code.'
+						'Settings copied to clipboard. Paste them into code to hard-code.'
 					);
 				} catch {
 					prompt('Copy these settings:', toCopy);
 				}
 			});
-
-			safeOn('toggle-controls', 'click', () => {
-				const panel = document.getElementById('sim-controls');
+			on('toggle-controls', 'click', () => {
+				const panel = $('sim-controls');
 				if (panel.dataset.hidden === '1') {
 					panel.dataset.hidden = '0';
 					panel.querySelector('.body').style.display = '';
@@ -1029,138 +1072,8 @@
 				}
 			});
 
-			// Start AFTER definitions to avoid TDZ
+			// Start
 			startSystem();
-
-			(function () {
-				const el = document.getElementById('perf-date');
-				if (!el) return;
-				const d = new Date();
-				const q = Math.floor(d.getMonth() / 3);
-				const qEndMonth = [2, 5, 8, 11][q];
-				const dt = new Date(d.getFullYear(), qEndMonth + 1, 0);
-				el.textContent = new Intl.DateTimeFormat('en-AU', {
-					day: '2-digit',
-					month: 'short',
-					year: 'numeric',
-				}).format(dt);
-			})();
-
-			// Build synthetic monthly-ish data around your path and S&P-like benchmarks
-			(function () {
-				const host = document.getElementById('perf-chart');
-				if (!host) return;
-
-				// Keyframes (index = 100 start). Dates approximate; chart is illustrative only.
-				const kf = [
-					{ d: '2024-07-01', v: 100.0 },
-					{ d: '2024-12-13', v: 138.0 }, // peak ~38%
-					{ d: '2025-02-19', v: 140.0 }, // sideways
-					{ d: '2025-04-20', v: 100.0 }, // back to 0%
-					{ d: '2025-06-30', v: 151.51 }, // finish +51.51%
-				];
-
-				// Helper: interpolate between keyframes to ~24 points for a smooth line
-				function interpolateKF(keys, points) {
-					const out = [];
-					for (let i = 0; i < keys.length - 1; i++) {
-						const a = keys[i],
-							b = keys[i + 1];
-						const steps = Math.max(1, Math.floor(points / (keys.length - 1)));
-						for (let s = 0; s < steps; s++) {
-							const t = s / steps;
-							out.push(a.v + (b.v - a.v) * t);
-						}
-					}
-					out.push(keys[keys.length - 1].v);
-					return out;
-				}
-
-				const dataComposite = interpolateKF(kf, 24);
-
-				// Benchmarks follow a gentler S&P-like curve with the same dip in April
-				// SPY (AUD-hedged) stronger than XKO overall
-				const dataSPY = dataComposite.map((_, i) => {
-					const t = i / (dataComposite.length - 1);
-					// end about +28%, similar shape but muted
-					const target = 100 + 28 * t;
-					// add April dip (~-10%) centred around 20 Apr window
-					const dip = Math.exp(-Math.pow((t - 0.75) / 0.08, 2)) * 10; // bell dip
-					return target - dip;
-				});
-
-				const dataXKO = dataComposite.map((_, i) => {
-					const t = i / (dataComposite.length - 1);
-					const target = 100 + 14 * t; // end ~+14%
-					const dip = Math.exp(-Math.pow((t - 0.75) / 0.1, 2)) * 8;
-					return target - dip;
-				});
-
-				// Normalise series so they all start at 100
-				function normalise(arr) {
-					const base = arr[0] || 100;
-					return arr.map((v) => (v / base) * 100);
-				}
-				const comp = normalise(dataComposite);
-				const xko = normalise(dataXKO);
-				const spy = normalise(dataSPY);
-
-				const W = host.clientWidth || 800,
-					H = host.clientHeight || 240,
-					P = 24;
-				const minVal = Math.min(...comp, ...xko, ...spy);
-				const maxVal = Math.max(...comp, ...xko, ...spy);
-				const x = (i) => P + (i * (W - 2 * P)) / (comp.length - 1);
-				const y = (v) =>
-					H - P - ((v - minVal) * (H - 2 * P)) / (maxVal - minVal || 1);
-				const pathStr = (arr) =>
-					arr.map((v, i) => (i ? 'L' : 'M') + x(i) + ',' + y(v)).join(' ');
-
-				const svg = `
-      <svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Performance chart">
-        <rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>
-        <g opacity="0.6">
-          ${[0.25, 0.5, 0.75]
-						.map((p) => {
-							const yy = P + p * (H - 2 * P);
-							return `<line x1="${P}" y1="${yy}" x2="${
-								W - P
-							}" y2="${yy}" stroke="#e6ecf5" stroke-width="1"/>`;
-						})
-						.join('')}
-        </g>
-        <path d="${pathStr(
-					xko
-				)}" fill="none" stroke="#b8c2d6" stroke-width="2"/>
-        <path d="${pathStr(
-					spy
-				)}" fill="none" stroke="#9ecbff" stroke-width="2"/>
-        <path d="${pathStr(
-					comp
-				)}" fill="none" stroke="#4b2bbf" stroke-width="2.6"/>
-        <g font-size="12" fill="#445" font-family="Inter,system-ui,Arial">
-          <rect x="${W - P - 230}" y="${
-					P - 16
-				}" width="230" height="50" rx="6" ry="6" fill="#f7f9fc" stroke="#d7dfeb"/>
-          <circle cx="${W - P - 218}" cy="${
-					P - 8
-				}" r="4" fill="#4b2bbf"/><text x="${W - P - 208}" y="${
-					P - 4
-				}">Composite (net)</text>
-          <circle cx="${W - P - 218}" cy="${
-					P + 8
-				}" r="4" fill="#b8c2d6"/><text x="${W - P - 208}" y="${
-					P + 12
-				}">S&amp;P/ASX 200 (XKO)</text>
-          <circle cx="${W - P - 218}" cy="${
-					P + 24
-				}" r="4" fill="#9ecbff"/><text x="${W - P - 208}" y="${
-					P + 28
-				}">S&amp;P 500 (SPY, AUD-hedged)</text>
-        </g>
-      </svg>`;
-				host.innerHTML = svg;
-			})();
 		</script>
 	</body>
 </html>
