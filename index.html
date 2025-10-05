@@ -364,7 +364,6 @@
 				transform: none;
 			}
 
-
 			/* Responsive */
 			@media (max-width: 1000px) {
 				.hero-wrap {
@@ -727,7 +726,7 @@
 				function targetPos(i) {
 					const W = canvas.width,
 						H = canvas.height;
-					const cx = W * 1,
+					const cx = W * 0.85,
 						cy = H * 0.5;
 					const ang =
 						(i / N) * Math.PI * 2 + Math.sin(t * 0.00035 * cfg.speed) * 0.5;
